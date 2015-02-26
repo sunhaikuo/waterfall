@@ -1,5 +1,20 @@
- window.onload=function(){
- 	for(var i=0; i<10; i++) {
+var imgData = [{"src":"30.jpg"},{"src":"31.jpg"},{"src":"32.jpg"},{"src":"33.jpg"},{"src":"34.jpg"}];
+window.onload=function(){
+ 	if(checkScrollSide()) {
+		loadData();
+	}
+ 	waterfall('main','box');
+ 	
+	window.onscroll = function() {
+		if(checkScrollSide()) {
+			loadData();
+			waterfall('main','box');
+		}
+	}
+}
+// 加载数据方法
+function loadData () {
+	for(var i=0; i<imgData.length; i++) {
  		var oBox = document.createElement("div");
  		oBox.className = "box";
  		var oMain = document.getElementById("main");
@@ -8,31 +23,11 @@
  		oPic.className = "pic";
  		oBox.appendChild(oPic);
  		var oImg = document.createElement("img");
- 		oImg.src = "img/" + i + ".jpg";
+ 		oImg.src = "img/" + imgData[i].src;
  		oPic.appendChild(oImg);
  	}
- 	window.setTimeout(function(){
- 		waterfall('main','box');	
- 	}, 1000);
- 	var imgData = [{"src":"30.jpg"},{"src":"31.jpg"},{"src":"32.jpg"},{"src":"33.jpg"},{"src":"34.jpg"}];
-	window.onscroll = function() {
-		if(checkScrollSide()) {
-			for(var i=0; i<imgData.length; i++) {
-		 		var oBox = document.createElement("div");
-		 		oBox.className = "box";
-		 		var oMain = document.getElementById("main");
-		 		oMain.appendChild(oBox);
-		 		var oPic = document.createElement("div");
-		 		oPic.className = "pic";
-		 		oBox.appendChild(oPic);
-		 		var oImg = document.createElement("img");
-		 		oImg.src = "img/" + imgData[i].src;
-		 		oPic.appendChild(oImg);
-		 	}
-			waterfall('main','box');
-		}
-	}
 }
+ // 瀑布流主方法
 function waterfall(parent,box){
   var oParent=document.getElementById(parent);
   var oBoxs=getByClass(oParent,box);
@@ -56,7 +51,7 @@ function waterfall(parent,box){
   }
 }
 
-
+// 取出所有class为clsName的元素
 function getByClass(parent,clsName){
   var boxArr=new Array(), 
       oElements=parent.getElementsByTagName('*');
