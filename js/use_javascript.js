@@ -41,12 +41,12 @@ function waterfall(parent,box){
       // 求最小值和最小值的索引
       var minBoxH = Math.min.apply(null, oBoxsH);
       var idx = getMinhIndex(oBoxsH, minBoxH);
-    	//计算及定义图片出现的位置
+    	  //计算及定义图片出现的位置
       oBoxs[i].style.position='absolute';
       oBoxs[i].style.left = oBoxs[idx].offsetLeft + 'px';
       oBoxs[i].style.top = minBoxH + 'px';
       // 改变数组值
-     	oBoxsH[idx] += oBoxs[i].offsetHeight;
+      oBoxsH[idx] += oBoxs[i].offsetHeight;
     }
   }
 }
@@ -74,7 +74,7 @@ function getMinhIndex(arr,val){
 
 // 获取滚动时异步取数据的边界
 function checkScrollSide () {
-	var oBoxs = getByClass(document.getElementById("main"), "box");
+	var oBoxs = getByClass(document.getElementById("main"), "box");// 获取所有box
 	var oEltHeight = Math.floor(oBoxs[oBoxs.length-1].offsetTop + oBoxs[oBoxs.length-1].offsetHeight/2);
 	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 	return (oEltHeight < scrollTop + document.documentElement.clientHeight ? true : false)
